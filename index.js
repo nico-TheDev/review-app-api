@@ -28,5 +28,8 @@ mongoose
         console.log(err);
     });
 
+app.use('/subject',SubjectRoute);
 
-app.use(SubjectRoute);
+app.use((req, res) => {
+    res.send("404 not found");
+});
