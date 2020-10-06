@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const SubjectRoute = require("./routes/SubjectRoute");
 const cors = require("cors");
+
+// ROUTES
+const SubjectRoute = require("./routes/SubjectRoute");
+const LessonRoutes = require("./routes/LessonRoutes");
 
 const dbi = `mongodb+srv://nico:1234@cluster0.mwvo1.mongodb.net/review-app?retryWrites=true&w=majority`;
 const app = express();
@@ -17,6 +20,7 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify:false
     })
     .then(() => {
         console.log("CONNECTED TO THE DB");
@@ -29,6 +33,8 @@ mongoose
     });
 
 app.use('/subject',SubjectRoute);
+app.use(LessonRoutes);
+
 
 app.use((req, res) => {
     res.send("404 not found");
