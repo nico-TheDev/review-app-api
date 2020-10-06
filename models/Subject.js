@@ -1,10 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-const lessonSchema = new Schema({
-    count: Number,
-    name: String,
-});
-
 const subjectSchema = new Schema({
     name: {
         type: String,
@@ -25,7 +20,6 @@ const subjectSchema = new Schema({
         required: true,
         lowercase:true
     },
-    lessons: [lessonSchema],
 });
 
 const Subject = model("Subject", subjectSchema);
