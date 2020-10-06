@@ -55,6 +55,7 @@ module.exports.subject_update_post = (req, res) => {
             res.send(doc);
         } else {
             console.log(err);
+            res.status(404).send(err);
         }
     });
 };
