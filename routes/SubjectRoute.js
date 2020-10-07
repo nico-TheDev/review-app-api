@@ -11,5 +11,8 @@ router.post('/new',subjectController.subject_post)
 router.post('/:id',subjectController.subject_update_post)
 // delete subject
 router.delete('/:id',subjectController.subject_delete)
+//Get Specific subject
+router.get('/:id',subjectController.subject_get)
+
 
 module.exports = router

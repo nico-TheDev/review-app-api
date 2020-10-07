@@ -48,7 +48,7 @@ module.exports.subject_update_post = (req, res) => {
         professor,
         schedule,
     };
-    
+
     Subject.findByIdAndUpdate(id, updatedSubject, (err, doc) => {
         if (!err) {
             console.log("Document Updated");
@@ -70,6 +70,20 @@ module.exports.subject_delete = (req, res) => {
         } else {
             console.error(err);
             res.send("Unsuccessful Delete");
+        }
+    });
+};
+
+module.exports.subject_get = (req, res) => {
+    const { id } = req.params;
+
+    Subject.findById(id, (err, doc) => {
+        if (!err) {
+            console.log("Subject Get");
+            res.json(doc);
+        } else {
+            console.error("Subject No Found");
+            res.status(404).send("Error in the Server: Finding ID");
         }
     });
 };
