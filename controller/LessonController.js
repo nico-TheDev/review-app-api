@@ -11,6 +11,21 @@ module.exports.lessons_all_get = async (req, res) => {
         res.status(400).send("Error in the server");
     }
 };
+
+module.exports.lesson_get = async  (req,res) => {
+    const {id} = req.params
+
+    try{
+        const lesson = await Lesson.findById(id)
+        res.json(lesson)
+    }
+    catch(err){
+        console.log(err)
+        res.status(404).send(err)
+    }
+
+}   
+
 module.exports.lesson_new_post = async (req, res) => {
     const { subjectID, title, count, desc } = req.body.data;
     try {
