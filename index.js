@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
+const authMiddleware = require("./middleware/AuthMiddleware");
 // ROUTES
 const SubjectRoute = require("./routes/SubjectRoute");
 const LessonRoutes = require("./routes/LessonRoutes");
@@ -14,6 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 
 // INITIALIZED SERVER AND DATABASE
 mongoose
@@ -21,7 +23,7 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
-        useFindAndModify:false
+        useFindAndModify: false,
     })
     .then(() => {
         console.log("CONNECTED TO THE DB");
@@ -33,10 +35,10 @@ mongoose
         console.log(err);
     });
 
-app.use('/subject',SubjectRoute);
+app.use("*", authMiddleware.validateUser);
+app.use("/subject", authMiddleware.requireAuth, SubjectRoute);
 app.use(LessonRoutes);
 app.use(UserRoutes);
-
 
 app.use((req, res) => {
     res.send("404 not found");
