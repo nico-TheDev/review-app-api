@@ -18,7 +18,11 @@ const subjectSchema = new Schema({
     schedule: {
         type: String,
         required: true,
-        lowercase:true
+        lowercase: true,
+    },
+    userID: {
+        type: String,
+        required: true,
     },
 });
 
