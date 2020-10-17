@@ -14,8 +14,8 @@ const app = express();
 // INITIALIZE MIDDLEWARE
 
 app.use(express.json());
-app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
+app.use(cors({ origin: true, credentials: true, preflightContinue: true }));
 
 // INITIALIZED SERVER AND DATABASE
 mongoose
