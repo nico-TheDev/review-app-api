@@ -13,7 +13,7 @@ const createToken = (id) => {
 
 module.exports.signup_post = async (req, res) => {
     const { firstName, lastName, email, password } = req.body.data;
-    
+
     try {
         const user = await User.create({
             firstName,
@@ -22,27 +22,29 @@ module.exports.signup_post = async (req, res) => {
             password,
         });
         const token = createToken(user._id);
-        res.cookie("jwt", token, { maxAge: expiration * 1000 });
+        res.cookie("jwt", token, {
+            domain: "http://localhost:3001",
+            maxAge: expiration * 1000,
+        });
         res.status(201).json({ user: user._id });
     } catch (err) {
         handleErrors(err);
-        res.send(err);
+        res.status(404).send(err);
     }
 };
 module.exports.login_post = async (req, res) => {
     const { email, password } = req.body.data;
-
     try {
-        const user = await User.login({
-            email,
-            password,
-        });
+        const user = await User.login(email, password);
         const token = createToken(user._id);
-        res.cookie("jwt", token, { httpOnly: true, maxAge: expiration * 1000 });
-        res.status(201).json({ user: user._id });
+        res.cookie("jwt", token, {
+            domain: "http://localhost:3001",
+            maxAge: expiration * 1000,
+        });
+        res.status(201).json({ user: user._id, token });
     } catch (err) {
         handleErrors(err);
-        res.send(err);
+        res.status(404).send(err);
     }
 };
 
