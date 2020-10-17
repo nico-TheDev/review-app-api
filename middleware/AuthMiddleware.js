@@ -1,8 +1,8 @@
 const User = require("../models/User");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 module.exports.validateUser = (req, res, next) => {
-    const token = req.cookies.jwt;
+    const { token } = req.params;
 
     if (token) {
         jwt.verify(token, "reviewapp", async (err, decodedToken) => {
@@ -12,6 +12,7 @@ module.exports.validateUser = (req, res, next) => {
             } else {
                 let user = await User.findById(decodedToken.id);
                 res.locals.user = user;
+                console.log("user validated")
                 next();
             }
         });
@@ -21,8 +22,8 @@ module.exports.validateUser = (req, res, next) => {
     }
 };
 
-module.exports.requireAuth = (req,res,next) => {
-    const token = req.cookies.jwt;
+module.exports.requireAuth = (req, res, next) => {
+    const { token } = req.params;
 
     if (token) {
         jwt.verify(token, "reviewapp", async (err, decodedToken) => {
@@ -36,6 +37,6 @@ module.exports.requireAuth = (req,res,next) => {
             }
         });
     } else {
-        res.redirect('/login')
+        res.redirect("/login");
     }
-}
+};
