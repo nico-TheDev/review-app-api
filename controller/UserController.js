@@ -26,7 +26,7 @@ module.exports.signup_post = async (req, res) => {
             domain: "http://localhost:3001",
             maxAge: expiration * 1000,
         });
-        res.status(201).json({ user: user._id });
+        res.status(201).json({ user: user._id, token });
     } catch (err) {
         handleErrors(err);
         res.status(404).send(err);
@@ -54,15 +54,17 @@ module.exports.logout_delete = (req, res) => {
 };
 
 module.exports.user_get = async (req, res) => {
-    const { id } = req.body.data;
+    const { id } = req.params;
 
     try {
         const user = await User.findById(id);
         res.status(200).json({
-            id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
+            user: {
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            },
         });
     } catch (err) {
         res.status(404).json(err);

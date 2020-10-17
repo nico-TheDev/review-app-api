@@ -11,22 +11,24 @@ const handleErrors = (err) => {
 };
 
 module.exports.subject_all_get = async (req, res) => {
+   const { userID } = req.params;
     try {
-        const subjects = await Subject.find();
+        const subjects = await Subject.find({ userID });
         res.json(subjects);
     } catch (err) {
         console.log(err);
     }
 };
 module.exports.subject_post = async (req, res) => {
-    const { name, code, professor, schedule } = req.body.data;
-    console.log(req.body);
+    const { name, code, professor, schedule, userID } = req.body.data;
+
     try {
         const subject = await Subject.create({
             name,
             code,
             professor,
             schedule,
+            userID,
         });
 
         console.log(subject);
@@ -39,7 +41,7 @@ module.exports.subject_post = async (req, res) => {
 };
 
 module.exports.subject_update_post = (req, res) => {
-    const { name, code, professor, schedule } = req.body.data;
+    const { name, code, professor, schedule, userID } = req.body.data;
     const { id } = req.params;
 
     const updatedSubject = {
@@ -47,6 +49,7 @@ module.exports.subject_update_post = (req, res) => {
         code,
         professor,
         schedule,
+        userID,
     };
 
     Subject.findByIdAndUpdate(id, updatedSubject, (err, doc) => {
