@@ -4,7 +4,7 @@ const subjectController = require("../controller/SubjectController")
 const router = Router();
 
 // GET SUBJECTS
-router.get('/all',subjectController.subject_all_get)
+router.get('/all/:userID',subjectController.subject_all_get)
 //Add Subject
 router.post('/new',subjectController.subject_post)
 //edit Subject
