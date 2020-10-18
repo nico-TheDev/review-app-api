@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true, preflightContinue: true }));
+app.use(cors({ origin: true, credentials: true }));
 
 // INITIALIZED SERVER AND DATABASE
 mongoose
@@ -36,7 +36,7 @@ mongoose
     });
 
 app.use("*", authMiddleware.validateUser);
-app.use("/subject", authMiddleware.requireAuth, SubjectRoute);
+app.use("/subject", SubjectRoute);
 app.use(LessonRoutes);
 app.use(UserRoutes);
 
