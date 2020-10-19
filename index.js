@@ -7,6 +7,7 @@ const authMiddleware = require("./middleware/AuthMiddleware");
 const SubjectRoute = require("./routes/SubjectRoute");
 const LessonRoutes = require("./routes/LessonRoutes");
 const UserRoutes = require("./routes/UserRoutes");
+const NotesRoutes = require("./routes/NotesRoutes");
 
 const dbi = `mongodb+srv://nico:1234@cluster0.mwvo1.mongodb.net/review-app?retryWrites=true&w=majority`;
 const app = express();
@@ -35,9 +36,10 @@ mongoose
         console.log(err);
     });
 
-app.use("*", authMiddleware.validateUser);
+// app.use("*", authMiddleware.validateUser);
 app.use("/subject", SubjectRoute);
 app.use(LessonRoutes);
+app.use(NotesRoutes);
 app.use(UserRoutes);
 
 app.use((req, res) => {
