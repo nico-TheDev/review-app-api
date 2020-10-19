@@ -14,7 +14,7 @@ const lessonSchema = new Schema(
             type: String,
             required: true,
         },
-        desc: String,
+        description: String,
     },
     {
         timestamps: true,
