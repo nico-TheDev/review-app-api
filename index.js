@@ -8,6 +8,7 @@ const SubjectRoute = require("./routes/SubjectRoute");
 const LessonRoutes = require("./routes/LessonRoutes");
 const UserRoutes = require("./routes/UserRoutes");
 const NotesRoutes = require("./routes/NotesRoutes");
+const QuestionRoutes = require("./routes/QuestionRoutes");
 
 const dbi = `mongodb+srv://nico:1234@cluster0.mwvo1.mongodb.net/review-app?retryWrites=true&w=majority`;
 const app = express();
@@ -41,6 +42,7 @@ app.use("/subject", SubjectRoute);
 app.use(LessonRoutes);
 app.use(NotesRoutes);
 app.use(UserRoutes);
+app.use(QuestionRoutes)
 
 app.use((req, res) => {
     res.send("404 not found");

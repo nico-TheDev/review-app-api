@@ -15,6 +15,8 @@ const lessonSchema = new Schema(
             required: true,
         },
         description: String,
+        highScore: Number,
+        numberOfTries: Number,
     },
     {
         timestamps: true,
