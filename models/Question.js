@@ -29,6 +29,10 @@ const QuestionSchema = new Schema({
         type: String,
         required: true,
     },
+    isAnswered:{
+        type: String,
+        required: true,
+    }
 });
 
 const Question = model("Question", QuestionSchema);
