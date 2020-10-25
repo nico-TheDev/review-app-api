@@ -37,7 +37,7 @@ mongoose
         console.log(err);
     });
 
-// app.use("*", authMiddleware.validateUser);
+app.use("*", authMiddleware.validateUser);
 app.use("/subject", SubjectRoute);
 app.use(LessonRoutes);
 app.use(NotesRoutes);
