@@ -39,9 +39,7 @@ mongoose
         console.log(err);
     });
 
-app.use("/", (req, res) => {
-    res.send("WELCOME TO REVIEW APP API!");
-});
+
 app.use("*", authMiddleware.validateUser);
 app.use("/subject", SubjectRoute);
 app.use(LessonRoutes);
