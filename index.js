@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
 const authMiddleware = require("./middleware/AuthMiddleware");
 // ROUTES
 const SubjectRoute = require("./routes/SubjectRoute");
@@ -15,6 +16,7 @@ const app = express();
 
 // INITIALIZE MIDDLEWARE
 
+app.use(compression());
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
@@ -29,7 +31,7 @@ mongoose
     })
     .then(() => {
         console.log("CONNECTED TO THE DB");
-        app.listen(3000, () => {
+        app.listen(process.env.PORT || 3000, () => {
             console.log("SERVER RUNNING");
         });
     })

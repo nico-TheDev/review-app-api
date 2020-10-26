@@ -34,7 +34,7 @@ module.exports.lesson_new_post = async (req, res) => {
             description,
         });
 
-        console.log(lesson);
+        // console.log(lesson);
         res.send(`New Lesson Created: ${lesson.title}`);
     } catch (err) {
         console.log(err);
@@ -54,7 +54,7 @@ module.exports.lesson_edit_post = (req, res) => {
 
     Lesson.findByIdAndUpdate(id, updatedLesson, (err, doc) => {
         if (!err) {
-            console.log("Lesson Updated!");
+            // console.log("Lesson Updated!");
             res.send(doc);
         } else {
             console.log(err);
@@ -67,7 +67,7 @@ module.exports.lessons_delete = (req, res) => {
 
     Lesson.findByIdAndDelete(id, (err, doc) => {
         if (!err) {
-            console.log("Lesson Deleted!");
+            // console.log("Lesson Deleted!");
             res.send(doc);
         } else {
             console.log(err);

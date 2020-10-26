@@ -9,7 +9,7 @@ module.exports.note_post = async (req, res) => {
             lessonID,
             notes,
         });
-        console.log("NEW NOTE CREATED");
+        // console.log("NEW NOTE CREATED");
         res.json(note);
     } catch (err) {
         console.log(err);
@@ -41,7 +41,7 @@ module.exports.note_update_post = async (req, res) => {
                 notes,
             }
         );
-        console.log("NOTE UPDATED");
+        // console.log("NOTE UPDATED");
         res.json(note);
     } catch (err) {
         console.log(err);
@@ -54,7 +54,7 @@ module.exports.note_delete = async (req, res) => {
 
     try {
         const note = await Notes.findOneAndDelete({ lessonID });
-        console.log("NOTE DELETED");
+        // console.log("NOTE DELETED");
         res.json(note);
     } catch (err) {
         console.log(err);

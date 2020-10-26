@@ -12,7 +12,7 @@ module.exports.validateUser = (req, res, next) => {
             } else {
                 let user = await User.findById(decodedToken.id);
                 res.locals.user = user;
-                console.log("user validated")
+                // console.log("user validated")
                 next();
             }
         });

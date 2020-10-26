@@ -31,7 +31,7 @@ module.exports.subject_post = async (req, res) => {
             userID,
         });
 
-        console.log(subject);
+        // console.log(subject);
 
         res.send("New Subject Created");
     } catch (err) {
@@ -54,7 +54,7 @@ module.exports.subject_update_post = (req, res) => {
 
     Subject.findByIdAndUpdate(id, updatedSubject, (err, doc) => {
         if (!err) {
-            console.log("Document Updated");
+            // console.log("Document Updated");
             res.send(doc);
         } else {
             console.log(err);
@@ -68,7 +68,7 @@ module.exports.subject_delete = (req, res) => {
 
     Subject.findByIdAndDelete(id, (err, doc) => {
         if (!err && doc) {
-            console.log("Deleted Successfully");
+            // console.log("Deleted Successfully");
             res.send(doc);
         } else {
             console.error(err);
